@@ -6,6 +6,7 @@
 # -------------------------------------------------------------------------
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
+import datetime
 
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too
@@ -180,26 +181,58 @@ relativity_condition = ["پسرعمو-دختر عمو","پسر خاله- دخت�
                         "نوه عمو-نوه عمو","نوه خاله -نوه خاله","نوه عمه-نوه دایی","فامیل دور","ندارند"]
 
 center = ["آشنایی از طریق پزشک","تبلیغات","مراکز پزشکی","اقوام و آشنایان","مدرسه","118","فضای مجازی","سایر موارد"]
+genetic_counselor = ["","دکتر صدرنبوی"]
 
 live_con = ["سالم","بیمار","مرده"]
 parturition_con = ["طبیعی","سزارین","زایمان دشوار"]
 yes_no_unknown = ["","بلی","خیر","نامشخص"]
 edu_list = ["بدون سواد","خواندن و نوشتن","ابتدایی","راهنمایی","متوسطه","دیپلم","فوق دیپلم","لیسانس","فوق لیسانس ","دکتری حرفه ای","دکتری تخصصی","حوزوی"]
+counselor_genetic_reasons = ["","پیش از ازدواج","حین بارداری","پس از بارداری","مشاوره تشخیصی - تشخیص بیماری ارثی در خانواده","سایر",]
+special_list = ["","مغز و اعصاب","اطفال"]
 
 upload_fields = []
 for i in range(1,101):
     upload_fields.append(Field("upload_{}".format(i),"upload",label="آپلود مدرک پزشکی {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
 
+counselor_name = []
+counselor_gen_reason = []
+upload_fields_counselling = []
+specialist_price = []
+specialist_field = []
+
+for i in range(1,21):
+    counselor_name.append(Field("counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),))    
+    upload_fields_counselling.append(Field("upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
+
+for j in range(1,11):
+    counselor_gen_reason.append(Field("reason_{}".format(i),requires=IS_IN_SET(counselor_genetic_reasons, zero=None),label="علت".format(i),))    
+    specialist_price.append(Field("price_{}".format(i),"string",label="هزینه".format(i),))    
+    specialist_field.append(Field("field_{}".format(i),requires=IS_IN_SET(special_list, zero=None),label="تخصص".format(i),))    
+
+signature = db.Table(db, 'signature',
+    Field('created_on', 'datetime', default=request.now),
+    Field('created_by', db.auth_user, default=auth.user_id),
+    Field('updated_on', 'datetime', update=request.now),
+    Field('updated_by', db.auth_user, update=auth.user_id))
+
 
 db.define_table("principal_info",
     # Field("case_number", "string",label="شماره پرونده"),
-    Field("case_number", "string",label="شماره پرونده", required=True),    
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False),    
+    signature,
+    Field("case_number", "string",label="شماره پرونده", required=True), 
+       
     migrate = True,
     fake_migrate=False,
     )
 # -----------------------Parents Section ------------------------------
 
 db.define_table("people_info", 
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False),    
+    signature,
+
     Field("full_name", "string",label="نام و نام خانوادگی", required=True),
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False),
     Field("id_code", "text",label="کدملی", required=True),
@@ -243,6 +276,10 @@ db.define_table("people_info",
 # -----------------------Kids Section ------------------------------
 
 db.define_table("kids_info",    
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False), 
+    signature,   
+
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
     Field("son_health", "string",label="تعداد فرزندان پسر سالم",required=True),
     Field("son_patient", "string",label="تعداد فرزندان پسر بیمار",required=True),
@@ -455,6 +492,10 @@ db.define_table("kids_info",
 
 # ----------------------- Contact Section ------------------------------
 db.define_table("contact_info",    
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False),    
+    signature,
+
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
 
 # اطلاعات تماس
@@ -475,6 +516,10 @@ db.define_table("contact_info",
 #-------------------- Further info Section -------------------------------
 
 db.define_table("further_info_section",
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False),    
+    signature,
+
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False),
 
 #  برای خانم /زن / دختر
@@ -661,13 +706,54 @@ db.define_table("further_info_section",
 
 
 
-db.define_table("physician_docs",    
+db.define_table("physician_docs",   
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False),  
+    signature,  
+
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
 
     Field("pedigree", "upload",label="آپلود شجره نامه", uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True),
-    *upload_fields[1,101]
+    *upload_fields[1:101]
 
   migrate = True,   
 
 )
 
+
+
+db.define_table("genetics_counseling_records",   
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False), 
+    signature,   
+
+    Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
+    *counselor_name[1:11],
+    *counselor_gen_reason[1:11],
+    *upload_fields_counselling[1:11],
+
+    
+
+  migrate = True,   
+
+)
+
+db.define_table("special_counseling_records",   
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False),    
+    signature,
+
+    Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
+    *counselor_name[11:21],
+    *specialist_field[1:11],
+    *upload_fields_counselling[11:21],
+    *specialist_price[1:11]
+
+  migrate = True,   
+
+)
+
+
+# db.define_table('log', Field('event'),
+#                         Field('event_time', 'datetime'),
+#                         Field('severity', 'integer'))
