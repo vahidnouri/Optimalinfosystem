@@ -184,7 +184,7 @@ center = ["آشنایی از طریق پزشک","تبلیغات","مراکز پ�
 genetic_counselor = ["","دکتر صدرنبوی"]
 
 live_con = ["سالم","بیمار","مرده"]
-parturition_con = ["طبیعی","سزارین","زایمان دشوار"]
+labour_con = ["طبیعی","سزارین","زایمان دشوار"]
 yes_no_unknown = ["","بلی","خیر","نامشخص"]
 edu_list = ["بدون سواد","خواندن و نوشتن","ابتدایی","راهنمایی","متوسطه","دیپلم","فوق دیپلم","لیسانس","فوق لیسانس ","دکتری حرفه ای","دکتری تخصصی","حوزوی"]
 counselor_genetic_reasons = ["","پیش از ازدواج","حین بارداری","پس از بارداری","مشاوره تشخیصی - تشخیص بیماری ارثی در خانواده","سایر",]
@@ -200,6 +200,30 @@ upload_fields_counselling = []
 specialist_price = []
 specialist_field = []
 
+kid_name = []
+kid_id_code = []
+kid_birth = []
+kid_gender = []
+kid_live = []
+kid_patient = []
+kid_death = []
+kid_number = []
+kid_labour = []
+kid_hospitalize_rec = []
+kid_hospitalize_exp = []
+kid_weight_mem = []
+kid_weight = []
+kid_height_mem = []
+kid_height = []
+kid_head_mem = []
+kid_head = []
+
+f_abortion_rec = []
+f_ab_pregnancy_numebr = []
+f_ab_mother_age = []
+f_ab_pregnancy_age = []
+f_abortion_reason = []
+
 for i in range(1,21):
     counselor_name.append(Field("counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),))    
     upload_fields_counselling.append(Field("upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
@@ -209,11 +233,48 @@ for j in range(1,11):
     specialist_price.append(Field("price_{}".format(i),"string",label="هزینه".format(i),))    
     specialist_field.append(Field("field_{}".format(i),requires=IS_IN_SET(special_list, zero=None),label="تخصص".format(i),))    
 
+
+
+for i in range(1,11):
+    
+    kid_name.append(Field("kid_{}_name".format(i), "string",label="نام فرزند درگیر عارضه",required=True),)        
+    kid_id_code.append(Field("kid_{}_id_code".format(i), "string",label="کدملی",required=True),)        
+    kid_birth.append(Field("kid_{}_birth".format(i), "string",label="تاریخ تولد",required=True),)  
+    kid_gender.append(Field("kid_{}_gender".format(i), requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True),) 
+    kid_live.append(Field("kid_{}_live".format(i), requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True),) 
+    kid_patient.append(Field("kid_{}_patient".format(i), "string",label="شرح بیماری"),)
+    kid_death.append(Field("kid_{}_death".format(i), "string",label="علت فوت"), )
+    kid_number.append(Field("kid_{}_number".format(i), "string",label="فرزند چندم",required=True), )
+    kid_labour.append(Field("kid_{}labour".format(i), requires=IS_IN_SET(labour_con, zero=None),label="وضعیت زایمان",required=True), )
+    kid_hospitalize_rec.append(Field("kid_{}_hospitalize_rec".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), )
+    kid_hospitalize_exp.append(Field("kid_{}_hospitalize_exp".format(i), "string",label="توضیحات",required=True), )
+
+#   وضعیت جسمی هنگام تولد
+
+    kid_weight_mem.append(Field("kid_{}_weight_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), )
+    kid_weight.append(Field("kid_{}_weight".format(i), "string",label="وزن به کیلوگرم"), )
+    kid_height_mem.append(Field("kid_{}_height_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), )
+    kid_height.append(Field("kid_{}_height".format(i), "string",label="قد به سانتیمتر"), )
+    kid_head_mem.append(Field("kid_{}_head_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), )
+    kid_head.append(Field("kid_{}_head".format(i), "string",label="دور سر به سانتیمتر"), )
+
+
+    
+for i in range(1,6):
+    
+    f_abortion_rec.append(Field("f_abortion_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط"),)
+    f_ab_pregnancy_numebr.append(Field("f_ab_pregnancy_numebr_{}".format(i), "string",label="بارداری چندم"),)
+    f_ab_mother_age.append(Field("f_ab_mother_age_{}".format(i), "string",label="سن مادر"),)
+    f_ab_pregnancy_age.append(Field("f_ab_pregnancy_age_{}".format(i), "string",label="سن حاملگی"),)
+    f_abortion_reason.append(Field("f_abortion_reason_{}".format(i), "string",label="علت"),)
+
 signature = db.Table(db, 'signature',
     Field('created_on', 'datetime', default=request.now),
     Field('created_by', db.auth_user, default=auth.user_id),
     Field('updated_on', 'datetime', update=request.now),
     Field('updated_by', db.auth_user, update=auth.user_id))
+
+
 
 
 db.define_table("principal_info",
@@ -224,7 +285,7 @@ db.define_table("principal_info",
     Field("case_number", "string",label="شماره پرونده", required=True), 
        
     migrate = True,
-    fake_migrate=False,
+    # fake_migrate=False,
     )
 # -----------------------Parents Section ------------------------------
 
@@ -293,199 +354,24 @@ db.define_table("kids_info",
 #       open required kid info for x number
 #--------------------------------------------------------------------------------
 
-
-    Field("kid_1_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_1_id_code", "string",label="کدملی",required=True),        
-    Field("kid_1_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_1_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_1_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_1_patient", "string",label="شرح بیماری"), 
-    Field("kid_1_death", "string",label="علت فوت"), 
-    Field("kid_1_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_1_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_1_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_1_hospitalize_exp", "string",label="توضیحات",required=True), 
-
-#   وضعیت جسمی هنگام تولد
-
-    Field("kid_1_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_1_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_1_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_1_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_1_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_1_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_2_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_2_id_code", "string",label="کدملی",required=True),        
-    Field("kid_2_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_2_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_2_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_2_patient", "string",label="شرح بیماری"), 
-    Field("kid_2_death", "string",label="علت فوت"), 
-    Field("kid_2_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_2_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_2_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_2_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_2_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_2_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_2_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_2_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_2_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_2_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_3_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_3_id_code", "string",label="کدملی",required=True),        
-    Field("kid_3_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_3_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_3_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_3_patient", "string",label="شرح بیماری"), 
-    Field("kid_3_death", "string",label="علت فوت"), 
-    Field("kid_3_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_3_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_3_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_3_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_3_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_3_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_3_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_3_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_3_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_3_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_4_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_4_id_code", "string",label="کدملی",required=True),        
-    Field("kid_4_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_4_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_4_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_4_patient", "string",label="شرح بیماری"), 
-    Field("kid_4_death", "string",label="علت فوت"), 
-    Field("kid_4_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_4_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_4_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_4_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_4_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_4_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_4_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_4_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_4_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_4_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_5_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_5_id_code", "string",label="کدملی",required=True),        
-    Field("kid_5_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_5_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_5_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_5_patient", "string",label="شرح بیماری"), 
-    Field("kid_5_death", "string",label="علت فوت"), 
-    Field("kid_5_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_5_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_5_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_5_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_5_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_5_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_5_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_5_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_5_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_5_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_6_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_6_id_code", "string",label="کدملی",required=True),        
-    Field("kid_6_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_6_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_6_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_6_patient", "string",label="شرح بیماری"), 
-    Field("kid_6_death", "string",label="علت فوت"), 
-    Field("kid_6_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_6_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_6_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_6_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_6_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_6_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_6_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_6_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_6_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_6_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_7_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_7_id_code", "string",label="کدملی",required=True),        
-    Field("kid_7_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_7_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_7_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_7_patient", "string",label="شرح بیماری"), 
-    Field("kid_7_death", "string",label="علت فوت"), 
-    Field("kid_7_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_7_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_7_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_7_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_7_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_7_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_7_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_7_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_7_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_7_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_8_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_8_id_code", "string",label="کدملی",required=True),        
-    Field("kid_8_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_8_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_8_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_8_patient", "string",label="شرح بیماری"), 
-    Field("kid_8_death", "string",label="علت فوت"), 
-    Field("kid_8_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_8_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_8_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_8_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_8_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_8_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_8_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_8_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_8_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_8_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_9_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_9_id_code", "string",label="کدملی",required=True),        
-    Field("kid_9_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_9_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_9_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_9_patient", "string",label="شرح بیماری"), 
-    Field("kid_9_death", "string",label="علت فوت"), 
-    Field("kid_9_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_9_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_9_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_9_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_9_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_9_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_9_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_9_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_9_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_9_head", "string",label="دور سر به سانتیمتر"), 
-
-    Field("kid_10_name", "string",label="نام فرزند درگیر عارضه",required=True),        
-    Field("kid_10_id_code", "string",label="کدملی",required=True),        
-    Field("kid_10_birth", "string",label="تاریخ تولد",required=True),  
-    Field("kid_10_gender", requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True), 
-    Field("kid_10_live", requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True), 
-    Field("kid_10_patient", "string",label="شرح بیماری"), 
-    Field("kid_10_death", "string",label="علت فوت"), 
-    Field("kid_10_number", "string",label="فرزند چندم",required=True), 
-    Field("kid_10_parturition", requires=IS_IN_SET(parturition_con, zero=None),label="وضعیت زایمان",required=True), 
-    Field("kid_10_hospitalize_rec", requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), 
-    Field("kid_10_hospitalize_exp", "string",label="توضیحات",required=True), 
-#   وضعیت جسمی هنگام تولد
-    Field("kid_10_weight_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_10_weight", "string",label="وزن به کیلوگرم"), 
-    Field("kid_10_height_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_10_height", "string",label="قد به سانتیمتر"), 
-    Field("kid_10_head_mem", requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), 
-    Field("kid_10_head", "string",label="دور سر به سانتیمتر"),     
-
+    *kid_name[1:11],
+    *kid_id_code[1:11],
+    *kid_birth[1:11],
+    *kid_gender[1:11],
+    *kid_live[1:11],
+    *kid_patient[1:11],
+    *kid_death[1:11],
+    *kid_number[1:11],
+    *kid_labour[1:11],
+    *kid_hospitalize_rec[1:11],
+    *kid_hospitalize_exp[1:11],
+    #   وضعیت جسمی هنگام تولد
+    *kid_weight_mem[1:11],
+    *kid_weight[1:11],
+    *kid_height_mem[1:11],
+    *kid_height[1:11],
+    *kid_head_mem[1:11],
+    *kid_head[1:11],
 
     migrate = True,
 )
@@ -578,41 +464,18 @@ db.define_table("further_info_section",
     Field("f_drug_pregnancy_numebr", "string",label="بارداری چندم"),
 
 
+
+
     ###--------------- ناباروری و سقط ----------------
 
     Field("f_infertility_rec", requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه عدم باروری"),
     Field("f_infertility_year", "string",label="مدت: سال"),
     Field("f_infertility_reason", "string",label="علت"),
-        
-    Field("f_abortion_rec_1", requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط"),
-    Field("f_ab_pregnancy_numebr_1", "string",label="بارداری چندم"),
-    Field("f_ab_mother_age_1", "string",label="سن مادر"),
-    Field("f_ab_pregnancy_age_1", "string",label="سن حاملگی"),
-    Field("f_abortion_reason_1", "string",label="علت"),
-
-    Field("f_abortion_rec_2", requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط"),
-    Field("f_ab_pregnancy_numebr_2", "string",label="بارداری چندم"),
-    Field("f_ab_mother_age_2", "string",label="سن مادر"),
-    Field("f_ab_pregnancy_age_2", "string",label="سن حاملگی"),
-    Field("f_abortion_reason_2", "string",label="علت"),
-
-    Field("f_abortion_rec_3", requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط"),
-    Field("f_ab_pregnancy_numebr_3", "string",label="بارداری چندم"),
-    Field("f_ab_mother_age_3", "string",label="سن مادر"),
-    Field("f_ab_pregnancy_age_3", "string",label="سن حاملگی"),
-    Field("f_abortion_reason_3", "string",label="علت"),
-
-    Field("f_abortion_rec_4", requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط"),
-    Field("f_ab_pregnancy_numebr_4", "string",label="بارداری چندم"),
-    Field("f_ab_mother_age_4", "string",label="سن مادر"),
-    Field("f_ab_pregnancy_age_4", "string",label="سن حاملگی"),
-    Field("f_abortion_reason_4", "string",label="علت"),
-
-    Field("f_abortion_rec_5", requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط"),
-    Field("f_ab_pregnancy_numebr_5", "string",label="بارداری چندم"),
-    Field("f_ab_mother_age_5", "string",label="سن مادر"),
-    Field("f_ab_pregnancy_age_5", "string",label="سن حاملگی"),
-    Field("f_abortion_reason_5", "string",label="علت"),
+    *f_abortion_rec[1:6],
+    *f_ab_pregnancy_numebr[1:6],
+    *f_ab_mother_age[1:6],
+    *f_ab_pregnancy_age[1:6],
+    *f_abortion_reason[1:6],
 
     Field("f_iufd_rec_1", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه"),
     Field("f_iufd_pregnancy_numebr_1", "string",label="بارداری چندم"),
