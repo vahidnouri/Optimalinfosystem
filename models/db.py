@@ -224,6 +224,14 @@ f_ab_mother_age = []
 f_ab_pregnancy_age = []
 f_abortion_reason = []
 
+
+f_iufd_rec = []
+f_iufd_pregnancy_numebr = []
+f_iufd_mother_age = []
+f_iufd_pregnancy_age = []
+f_iufd_reason = []
+
+
 for i in range(1,21):
     counselor_name.append(Field("counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),))    
     upload_fields_counselling.append(Field("upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
@@ -260,6 +268,8 @@ for i in range(1,11):
 
 
     
+
+    
 for i in range(1,6):
     
     f_abortion_rec.append(Field("f_abortion_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط"),)
@@ -268,12 +278,17 @@ for i in range(1,6):
     f_ab_pregnancy_age.append(Field("f_ab_pregnancy_age_{}".format(i), "string",label="سن حاملگی"),)
     f_abortion_reason.append(Field("f_abortion_reason_{}".format(i), "string",label="علت"),)
 
+    f_iufd_rec.append(Field("f_iufd_rec_{}", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه"),)
+    f_iufd_pregnancy_numebr.append(Field("f_iufd_pregnancy_numebr_{}", "string",label="بارداری چندم"),)
+    f_iufd_mother_age.append(Field("f_iufd_mother_age_{}", "string",label="سن مادر"),)
+    f_iufd_pregnancy_age.append(Field("f_iufd_pregnancy_age_{}", "string",label="سن حاملگی"),)
+    f_iufd_reason.append(Field("f_iufd_reason_{}", "string",label="علت"),)
+
 signature = db.Table(db, 'signature',
     Field('created_on', 'datetime', default=request.now),
     Field('created_by', db.auth_user, default=auth.user_id),
     Field('updated_on', 'datetime', update=request.now),
     Field('updated_by', db.auth_user, update=auth.user_id))
-
 
 
 
@@ -477,35 +492,11 @@ db.define_table("further_info_section",
     *f_ab_pregnancy_age[1:6],
     *f_abortion_reason[1:6],
 
-    Field("f_iufd_rec_1", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه"),
-    Field("f_iufd_pregnancy_numebr_1", "string",label="بارداری چندم"),
-    Field("f_iufd_mother_age_1", "string",label="سن مادر"),
-    Field("f_iufd_pregnancy_age_1", "string",label="سن حاملگی"),
-    Field("f_iufd_reason_1", "string",label="علت"),
-
-    Field("f_iufd_rec_2", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه"),
-    Field("f_iufd_pregnancy_numebr_2", "string",label="بارداری چندم"),
-    Field("f_iufd_mother_age_2", "string",label="سن مادر"),
-    Field("f_iufd_pregnancy_age_2", "string",label="سن حاملگی"),
-    Field("f_iufd_reason_2", "string",label="علت"),
-
-    Field("f_iufd_rec_3", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه"),
-    Field("f_iufd_pregnancy_numebr_3", "string",label="بارداری چندم"),
-    Field("f_iufd_mother_age_3", "string",label="سن مادر"),
-    Field("f_iufd_pregnancy_age_3", "string",label="سن حاملگی"),
-    Field("f_iufd_reason_3", "string",label="علت"),
-
-    Field("f_iufd_rec_4", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه"),
-    Field("f_iufd_pregnancy_numebr_4", "string",label="بارداری چندم"),
-    Field("f_iufd_mother_age_4", "string",label="سن مادر"),
-    Field("f_iufd_pregnancy_age_4", "string",label="سن حاملگی"),
-    Field("f_iufd_reason_4", "string",label="علت"),
-
-    Field("f_iufd_rec_5", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه"),
-    Field("f_iufd_pregnancy_numebr_5", "string",label="بارداری چندم"),
-    Field("f_iufd_mother_age_5", "string",label="سن مادر"),
-    Field("f_iufd_pregnancy_age_5", "string",label="سن حاملگی"),
-    Field("f_iufd_reason_5", "string",label="علت"),
+    *f_iufd_rec[1:6],
+    *f_iufd_pregnancy_numebr[1:6],
+    *f_iufd_mother_age[1:6],
+    *f_iufd_pregnancy_age[1:6],
+    *f_iufd_reason[1:6],
 
     Field("infertility_treatments", requires=IS_IN_SET(yes_no_unknown, zero=None),label="اقدامات درمانی ناباروری"),
     Field("medicine_treatments", "string",label="درمان دارویی"),
