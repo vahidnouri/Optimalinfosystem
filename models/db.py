@@ -189,6 +189,9 @@ yes_no_unknown = ["","بلی","خیر","نامشخص"]
 edu_list = ["بدون سواد","خواندن و نوشتن","ابتدایی","راهنمایی","متوسطه","دیپلم","فوق دیپلم","لیسانس","فوق لیسانس ","دکتری حرفه ای","دکتری تخصصی","حوزوی"]
 counselor_genetic_reasons = ["","پیش از ازدواج","حین بارداری","پس از بارداری","مشاوره تشخیصی - تشخیص بیماری ارثی در خانواده","سایر",]
 special_list = ["","مغز و اعصاب","اطفال"]
+test_names = []
+test_users = ["آقا","خانم","فرزند","جنین",""]
+
 
 upload_fields = []
 for i in range(1,101):
@@ -233,7 +236,7 @@ f_iufd_reason = []
 
 
 for i in range(1,21):
-    counselor_name.append(Field("counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),))    
+    counselor_name.append(Field("counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '))    
     upload_fields_counselling.append(Field("upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
 
 for j in range(1,11):
@@ -245,25 +248,25 @@ for j in range(1,11):
 
 for i in range(1,11):
     
-    kid_name.append(Field("kid_{}_name".format(i), "string",label="نام فرزند درگیر عارضه",required=True),)        
-    kid_id_code.append(Field("kid_{}_id_code".format(i), "string",label="کدملی",required=True),)        
-    kid_birth.append(Field("kid_{}_birth".format(i), "string",label="تاریخ تولد",required=True),)  
-    kid_gender.append(Field("kid_{}_gender".format(i), requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True),) 
-    kid_live.append(Field("kid_{}_live".format(i), requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True),) 
+    kid_name.append(Field("kid_{}_name".format(i), "string",label="نام فرزند درگیر عارضه",required=True,default=' '),)        
+    kid_id_code.append(Field("kid_{}_id_code".format(i), "string",label="کدملی",required=True,default=' '),)        
+    kid_birth.append(Field("kid_{}_birth".format(i), "string",label="تاریخ تولد",required=True,default=' '),)  
+    kid_gender.append(Field("kid_{}_gender".format(i), requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True,default=' '),) 
+    kid_live.append(Field("kid_{}_live".format(i), requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True,default=' '),) 
     kid_patient.append(Field("kid_{}_patient".format(i), "string",label="شرح بیماری"),)
     kid_death.append(Field("kid_{}_death".format(i), "string",label="علت فوت"), )
-    kid_number.append(Field("kid_{}_number".format(i), "string",label="فرزند چندم",required=True), )
-    kid_labour.append(Field("kid_{}labour".format(i), requires=IS_IN_SET(labour_con, zero=None),label="وضعیت زایمان",required=True), )
-    kid_hospitalize_rec.append(Field("kid_{}_hospitalize_rec".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True), )
-    kid_hospitalize_exp.append(Field("kid_{}_hospitalize_exp".format(i), "string",label="توضیحات",required=True), )
+    kid_number.append(Field("kid_{}_number".format(i), "string",label="فرزند چندم",required=True,default=' '), )
+    kid_labour.append(Field("kid_{}labour".format(i), requires=IS_IN_SET(labour_con, zero=None),label="وضعیت زایمان",required=True,default=' '), )
+    kid_hospitalize_rec.append(Field("kid_{}_hospitalize_rec".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True,default=' '), )
+    kid_hospitalize_exp.append(Field("kid_{}_hospitalize_exp".format(i), "string",label="توضیحات",required=True,default=' '), )
 
 #   وضعیت جسمی هنگام تولد
 
-    kid_weight_mem.append(Field("kid_{}_weight_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), )
+    kid_weight_mem.append(Field("kid_{}_weight_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True,default=' '), )
     kid_weight.append(Field("kid_{}_weight".format(i), "string",label="وزن به کیلوگرم"), )
-    kid_height_mem.append(Field("kid_{}_height_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), )
+    kid_height_mem.append(Field("kid_{}_height_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="قد را بخاطر دارد",required=True,default=' '), )
     kid_height.append(Field("kid_{}_height".format(i), "string",label="قد به سانتیمتر"), )
-    kid_head_mem.append(Field("kid_{}_head_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True), )
+    kid_head_mem.append(Field("kid_{}_head_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="دور سر را بخاطر دارد",required=True,default=' '), )
     kid_head.append(Field("kid_{}_head".format(i), "string",label="دور سر به سانتیمتر"), )
 
 
@@ -272,17 +275,17 @@ for i in range(1,11):
     
 for i in range(1,6):
     
-    f_abortion_rec.append(Field("f_abortion_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط"),)
-    f_ab_pregnancy_numebr.append(Field("f_ab_pregnancy_numebr_{}".format(i), "string",label="بارداری چندم"),)
-    f_ab_mother_age.append(Field("f_ab_mother_age_{}".format(i), "string",label="سن مادر"),)
-    f_ab_pregnancy_age.append(Field("f_ab_pregnancy_age_{}".format(i), "string",label="سن حاملگی"),)
-    f_abortion_reason.append(Field("f_abortion_reason_{}".format(i), "string",label="علت"),)
+    f_abortion_rec.append(Field("f_abortion_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط",required=True),)
+    f_ab_pregnancy_numebr.append(Field("f_ab_pregnancy_numebr_{}".format(i), "string",label="بارداری چندم",required=True,default=' '),)
+    f_ab_mother_age.append(Field("f_ab_mother_age_{}".format(i), "string",label="سن مادر",required=True,default=' '),)
+    f_ab_pregnancy_age.append(Field("f_ab_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
+    f_abortion_reason.append(Field("f_abortion_reason_{}".format(i), "string",label="علت",required=True,default=' '),)
 
-    f_iufd_rec.append(Field("f_iufd_rec_{}", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه"),)
-    f_iufd_pregnancy_numebr.append(Field("f_iufd_pregnancy_numebr_{}", "string",label="بارداری چندم"),)
-    f_iufd_mother_age.append(Field("f_iufd_mother_age_{}", "string",label="سن مادر"),)
-    f_iufd_pregnancy_age.append(Field("f_iufd_pregnancy_age_{}", "string",label="سن حاملگی"),)
-    f_iufd_reason.append(Field("f_iufd_reason_{}", "string",label="علت"),)
+    f_iufd_rec.append(Field("f_iufd_rec_{}", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه",required=True,),)
+    f_iufd_pregnancy_numebr.append(Field("f_iufd_pregnancy_numebr_{}", "string",label="بارداری چندم",required=True,default=' '),)
+    f_iufd_mother_age.append(Field("f_iufd_mother_age_{}", "string",label="سن مادر",required=True,default=' '),)
+    f_iufd_pregnancy_age.append(Field("f_iufd_pregnancy_age_{}", "string",label="سن حاملگی",required=True,default=' '),)
+    f_iufd_reason.append(Field("f_iufd_reason_{}", "string",label="علت",required=True,default=' '),)
 
 signature = db.Table(db, 'signature',
     Field('created_on', 'datetime', default=request.now),
@@ -329,14 +332,14 @@ db.define_table("people_info",
 
 # مشخصات همسر عنوان
 
-    Field("probound_full_name", "string",label="نام و نام خانوادگی", required=True),
+    Field("probound_full_name", "string",label="نام و نام خانوادگی", required=True,default=' '),
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False),
-    Field("probound_id_code", "text",label="کدملی", required=True),
-    Field("probound_gender", requires=IS_IN_SET(genders, zero=None),label="جنسیت", required=True),
-    Field("probound_father_name", "string",label="نام پدر", required=True),
-    Field("probound_birth_date", "string",label="تاریخ تولد", required=True),
-    Field("probound_birth_pro", "string",label="استان", required=True),
-    Field("probound_birth_city", "string",label="شهر", required=True),
+    Field("probound_id_code", "text",label="کدملی", required=True,default=' '),
+    Field("probound_gender", requires=IS_IN_SET(genders, zero=None),label="جنسیت", required=True,default=' '),
+    Field("probound_father_name", "string",label="نام پدر", required=True,default=' '),
+    Field("probound_birth_date", "string",label="تاریخ تولد", required=True,default=' '),
+    Field("probound_birth_pro", "string",label="استان", required=True,default=' '),
+    Field("probound_birth_city", "string",label="شهر", required=True,default=' '),
     Field("probound_race", requires=IS_IN_SET(races, zero=None),label="قومیت", required=True),
     Field("probound_religions", requires=IS_IN_SET(religion, zero=None),label="دین"),
     Field("probound_other_religions", "string",label="سایر"),
@@ -357,12 +360,12 @@ db.define_table("kids_info",
     signature,   
 
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
-    Field("son_health", "string",label="تعداد فرزندان پسر سالم",required=True),
-    Field("son_patient", "string",label="تعداد فرزندان پسر بیمار",required=True),
-    Field("son_death", "string",label="تعداد فرزندان پسر فوت شده",required=True),    
-    Field("doughter_health", "string",label="تعداد فرزندان دختر سالم",required=True),
-    Field("doughter_patient", "string",label="تعداد فرزندان دختر بیمار",required=True),
-    Field("doughter_death", "string",label="تعداد فرزندان دختر فوت شده",required=True),    
+    Field("son_health", "string",label="تعداد فرزندان پسر سالم",required=True,default=' '),
+    Field("son_patient", "string",label="تعداد فرزندان پسر بیمار",required=True,default=' '),
+    Field("son_death", "string",label="تعداد فرزندان پسر فوت شده",required=True,default=' '),    
+    Field("doughter_health", "string",label="تعداد فرزندان دختر سالم",required=True,default=' '),
+    Field("doughter_patient", "string",label="تعداد فرزندان دختر بیمار",required=True,default=' '),
+    Field("doughter_death", "string",label="تعداد فرزندان دختر فوت شده",required=True,default=' '),    
 
 #--------------------------------------------------------------------------------
 #   if x = (son_patient +  son_death + doughter_patient + doughter_death + son_health + doughter_health) > 0 :
@@ -401,15 +404,15 @@ db.define_table("contact_info",
 
 # اطلاعات تماس
 
-    Field("address", "text",label="محل سکونت",required=True),
-    Field("address_city", "text",label="شهرستان",required=True),
-    Field("tel", "string",label="تلفن",required=True),    
-    Field("cellphone", "string",label=" تلفن همراه",required=True),    
+    Field("address", "text",label="محل سکونت",required=True,default=' '),
+    Field("address_city", "text",label="شهرستان",required=True,default=' '),
+    Field("tel", "string",label="تلفن",required=True,default=' '),    
+    Field("cellphone", "string",label=" تلفن همراه",required=True,default=' '),    
     Field("e_mail", "string",label="ایمیل"),
 
 # نحوه آشنایی با مرکز
 
-    Field("knowing_centre", requires=IS_IN_SET(center, zero=None),label="نحوه آشنایی با مرکز",required=True),  
+    Field("knowing_centre", requires=IS_IN_SET(center, zero=None),label="نحوه آشنایی با مرکز",required=True,default=' '),  
     Field("center_others", "string",label="سایر موارد"),      
     migrate = True,
 )
@@ -608,6 +611,28 @@ db.define_table("special_counseling_records",
 )
 
 
-# db.define_table('log', Field('event'),
-#                         Field('event_time', 'datetime'),
-#                         Field('severity', 'integer'))
+db.define_table("genetic_test_records",
+    Field("date", "date",label="تاریخ", writable = False),    
+    Field("time", "time",label="زمان", writable = False),    
+    signature,
+    Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
+
+    Field("test_user", requires=IS_IN_SET(test_users, zero=None),label="تست برای", ), 
+    Field("test_name", requires=IS_IN_SET(test_names, zero=None),label="نام آزمایش", ), 
+    Field("referred_physician", "string",label="پزشک ارجاع دهنده", required = True, default = ' '), 
+    Field("referred_physician_sp", "string",label="تخصص", required = True, default = ' '), 
+
+    # بخش ها
+    Field("molecular_diagnosis", requires=IS_IN_SET(yes_no, zero=None),label="تشخیص مولکولی", required = True), 
+    Field("pnd_1", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 PND",required = True ), 
+    Field("pnd_2", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 2 PND", required = True), 
+    Field("pnd_1_2", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 و 2 PND", required = True), 
+    Field("cyto_blood", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک خون", required = True), 
+    Field("cyto_amniotic", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک آمنیون",required = True), 
+
+
+
+
+
+    migrate = True,
+)    
