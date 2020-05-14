@@ -235,6 +235,15 @@ f_iufd_pregnancy_age = []
 f_iufd_reason = []
 
 
+molecular_diagnosis = []
+pnd_1 = []
+pnd_2 = []
+pnd_1_2 = []
+cyto_blood = []
+cyto_amniotic = []
+
+
+
 for i in range(1,21):
     counselor_name.append(Field("counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '))    
     upload_fields_counselling.append(Field("upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
@@ -270,6 +279,13 @@ for i in range(1,11):
     kid_head.append(Field("kid_{}_head".format(i), "string",label="دور سر به سانتیمتر"), )
 
 
+
+    molecular_diagnosis.append(Field("molecular_diagnosis_{}", requires=IS_IN_SET(yes_no, zero=None),label="تشخیص مولکولی", required = True), )
+    pnd_1.append(Field("pnd_1_{}", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 PND",required = True ), )
+    pnd_2.append(Field("pnd_2_{}", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 2 PND", required = True), )
+    pnd_1_2.append(Field("pnd_1_2_{}", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 و 2 PND", required = True), )
+    cyto_blood.append(Field("cyto_blood_{}", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک خون", required = True), )
+    cyto_amniotic.append(Field("cyto_amniotic_{}", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک آمنیون",required = True), )
     
 
     
@@ -623,13 +639,13 @@ db.define_table("genetic_test_records",
     Field("referred_physician_sp", "string",label="تخصص", required = True, default = ' '), 
 
     # بخش ها
-    Field("molecular_diagnosis_1", requires=IS_IN_SET(yes_no, zero=None),label="تشخیص مولکولی", required = True), 
-    Field("pnd_1_1", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 PND",required = True ), 
-    Field("pnd_2_", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 2 PND", required = True), 
-    Field("pnd_1_2_1", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 و 2 PND", required = True), 
-    Field("cyto_blood_1", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک خون", required = True), 
-    Field("cyto_amniotic_1", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک آمنیون",required = True), 
 
+    *molecular_diagnosis[1:11],
+    *pnd_1[1:11],
+    *pnd_2[1:11],
+    *pnd_1_2[1:11],
+    *cyto_blood[1:11],
+    *cyto_amniotic[1:11],    
 #  اندیکاسیون درخواست آزمایش
 
     Field("infertility_disease_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های زنان و نازایی : ناباروری، سقط مکرر، اختلالات قائدگی ",required = True), 
