@@ -261,6 +261,39 @@ skin_diseases = []
 musculoskeletal_diseases = []
 genitourinary_diseases = []
 
+
+edta = []
+heparin = []
+cvs = []
+af = []
+abortion_product = []
+cortage_product = []
+paraffin_texture = []
+blood_others = []
+
+
+pregnancy_weeks = []
+pregnancy_days = []
+sampler = []
+has_infection_history = []
+hbv = []
+hcv = []
+hiv = []
+htlv1 = []
+other_infections = []
+
+
+use_medicine = []
+duration_medicine = []
+
+
+for i in range(1,11):
+    for j in range(1,6):
+        use_medicine.append(Field("use_medicine_{}_{}".format(i,j), "string",label="مصرف دارو",required = True), )
+        duration_medicine.append(Field("duration_medicine_{}_{}".format(i,j), "string",label="مدت مصرف",required = True), )
+        
+
+
 for i in range(1,21):
     counselor_name.append(Field("counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '))    
     upload_fields_counselling.append(Field("upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
@@ -323,6 +356,28 @@ for i in range(1,11):
     skin_diseases.append(Field("skin_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های بافت پوست و بافت همبند:سندرم مارفان",required = True), )
     musculoskeletal_diseases.append(Field("musculoskeletal_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم عضلانی :دیستروفی های بکر، دوشن",required = True), )
     genitourinary_diseases.append(Field("genitourinary_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم ادراری تناسلی :ابهام جنسی، اختلالات کلیوی ",required = True), )
+
+
+
+    edta.append(Field("edta_{}", requires=IS_IN_SET(yes_no, zero=None),label="EDTA خون ",required = True), )
+    heparin.append(Field("heparin_{}", requires=IS_IN_SET(yes_no, zero=None),label="خون هپارینه ",required = True), )
+    cvs.append(Field("cvs_{}", requires=IS_IN_SET(yes_no, zero=None),label="CVS",required = True), )
+    af.append(Field("af_{}", requires=IS_IN_SET(yes_no, zero=None),label="AF",required = True), )
+    abortion_product.append(Field("abortion_product_{}", requires=IS_IN_SET(yes_no, zero=None),label="محصول سقط",required = True), )
+    cortage_product.append(Field("cortage_product_{}", requires=IS_IN_SET(yes_no, zero=None),label="محصول کورتاژ",required = True), )
+    paraffin_texture.append(Field("paraffin_texture_{}", requires=IS_IN_SET(yes_no, zero=None),label="بافت پارافینه",required = True), )
+    blood_others.append(Field("blood_others_{}", "string",label="سایر",required = True), )
+    
+    pregnancy_weeks.append(Field("pregnancy_weeks_{}", "string",label="هفته چندم بارداری",required = True), )
+    pregnancy_days.append(Field("pregnancy_days_{}", "string",label="روز چندم بارداری",required = True), )
+    sampler.append(Field("sampler_{}", "string",label="پزشک نمونه گیر",required = True), )
+
+    has_infection_history.append(Field("has_infection_history_{}", requires=IS_IN_SET(yes_no, zero=None),label="سابقه عفونت ندارد",required = True), )
+    hbv.append(Field("hbv_{}", requires=IS_IN_SET(yes_no, zero=None),label="HBV",required = True), )
+    hcv.append(Field("hcv_{}", requires=IS_IN_SET(yes_no, zero=None),label="HCV",required = True), )
+    hiv.append(Field("hiv_{}", requires=IS_IN_SET(yes_no, zero=None),label="HIV",required = True), )
+    htlv1.append(Field("htlv1_{}", requires=IS_IN_SET(yes_no, zero=None),label="HTLV1",required = True), )
+    other_infections.append(Field("other_infections_{}", "string",label="سایر",required = True), )
     
 for i in range(1,6):
     
@@ -704,6 +759,16 @@ db.define_table("genetic_test_records",
 
 
 #  نمونه خون
+    
+    *edta[1:11],
+    *heparin[1:11],
+    *cvs[1:11],
+    *af[1:11],
+    *abortion_product[1:11],
+    *cortage_product[1:11],
+    *paraffin_texture[1:11],
+    *blood_others[1:11],
+
 
     Field("edta_1", requires=IS_IN_SET(yes_no, zero=None),label="EDTA خون ",required = True), 
     Field("heparin_1", requires=IS_IN_SET(yes_no, zero=None),label="خون هپارینه ",required = True), 
