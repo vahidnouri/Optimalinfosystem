@@ -203,23 +203,7 @@ upload_fields_counselling = []
 specialist_price = []
 specialist_field = []
 
-kid_name = []
-kid_id_code = []
-kid_birth = []
-kid_gender = []
-kid_live = []
-kid_patient = []
-kid_death = []
-kid_number = []
-kid_labour = []
-kid_hospitalize_rec = []
-kid_hospitalize_exp = []
-kid_weight_mem = []
-kid_weight = []
-kid_height_mem = []
-kid_height = []
-kid_head_mem = []
-kid_head = []
+kid_info = []
 
 f_abortion_rec = []
 f_ab_pregnancy_numebr = []
@@ -308,25 +292,25 @@ for j in range(1,11):
 for i in range(1,11):
     
     kid_name.append(Field("kid_{}_name".format(i), "string",label="نام فرزند درگیر عارضه",required=True,default=' '),)        
-    kid_id_code.append(Field("kid_{}_id_code".format(i), "string",label="کدملی",required=True,default=' '),)        
-    kid_birth.append(Field("kid_{}_birth".format(i), "string",label="تاریخ تولد",required=True,default=' '),)  
-    kid_gender.append(Field("kid_{}_gender".format(i), requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True,default=' '),) 
-    kid_live.append(Field("kid_{}_live".format(i), requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True,default=' '),) 
-    kid_patient.append(Field("kid_{}_patient".format(i), "string",label="شرح بیماری"),)
-    kid_death.append(Field("kid_{}_death".format(i), "string",label="علت فوت"), )
-    kid_number.append(Field("kid_{}_number".format(i), "string",label="فرزند چندم",required=True,default=' '), )
-    kid_labour.append(Field("kid_{}labour".format(i), requires=IS_IN_SET(labour_con, zero=None),label="وضعیت زایمان",required=True,default=' '), )
-    kid_hospitalize_rec.append(Field("kid_{}_hospitalize_rec".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True,default=' '), )
-    kid_hospitalize_exp.append(Field("kid_{}_hospitalize_exp".format(i), "string",label="توضیحات",required=True,default=' '), )
+    kid_info.append(Field("kid_{}_id_code".format(i), "string",label="کدملی",required=True,default=' '),)        
+    kid_info.append(Field("kid_{}_birth".format(i), "string",label="تاریخ تولد",required=True,default=' '),)  
+    kid_info.append(Field("kid_{}_gender".format(i), requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True,default=' '),) 
+    kid_info.append(Field("kid_{}_live".format(i), requires=IS_IN_SET(live_con, zero=None),label="وضعیت جسمانی فعلی",required=True,default=' '),) 
+    kid_info.append(Field("kid_{}_patient".format(i), "string",label="شرح بیماری"),)
+    kid_info.append(Field("kid_{}_death".format(i), "string",label="علت فوت"), )
+    kid_info.append(Field("kid_{}_number".format(i), "string",label="فرزند چندم",required=True,default=' '), )
+    kid_info.append(Field("kid_{}labour".format(i), requires=IS_IN_SET(labour_con, zero=None),label="وضعیت زایمان",required=True,default=' '), )
+    kid_info.append(Field("kid_{}_hospitalize_rec".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="سابقه بستری در دوران نوزادی",required=True,default=' '), )
+    kid_info.append(Field("kid_{}_hospitalize_exp".format(i), "string",label="توضیحات",required=True,default=' '), )
 
 #   وضعیت جسمی هنگام تولد
 
-    kid_weight_mem.append(Field("kid_{}_weight_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True,default=' '), )
-    kid_weight.append(Field("kid_{}_weight".format(i), "string",label="وزن به کیلوگرم"), )
-    kid_height_mem.append(Field("kid_{}_height_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="قد را بخاطر دارد",required=True,default=' '), )
-    kid_height.append(Field("kid_{}_height".format(i), "string",label="قد به سانتیمتر"), )
-    kid_head_mem.append(Field("kid_{}_head_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="دور سر را بخاطر دارد",required=True,default=' '), )
-    kid_head.append(Field("kid_{}_head".format(i), "string",label="دور سر به سانتیمتر"), )
+    kid_info.append(Field("kid_{}_weight_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="وزن را بخاطر دارد",required=True,default=' '), )
+    kid_info.append(Field("kid_{}_weight".format(i), "string",label="وزن به کیلوگرم"), )
+    kid_info.append(Field("kid_{}_height_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="قد را بخاطر دارد",required=True,default=' '), )
+    kid_info.append(Field("kid_{}_height".format(i), "string",label="قد به سانتیمتر"), )
+    kid_info.append(Field("kid_{}_head_mem".format(i), requires=IS_IN_SET(yes_no_space, zero=None),label="دور سر را بخاطر دارد",required=True,default=' '), )
+    kid_info.append(Field("kid_{}_head".format(i), "string",label="دور سر به سانتیمتر"), )
 
 
 
@@ -478,24 +462,8 @@ db.define_table("kids_info",
 #       open required kid info for x number
 #--------------------------------------------------------------------------------
 
-    *kid_name[1:11],
-    *kid_id_code[1:11],
-    *kid_birth[1:11],
-    *kid_gender[1:11],
-    *kid_live[1:11],
-    *kid_patient[1:11],
-    *kid_death[1:11],
-    *kid_number[1:11],
-    *kid_labour[1:11],
-    *kid_hospitalize_rec[1:11],
-    *kid_hospitalize_exp[1:11],
-    #   وضعیت جسمی هنگام تولد
-    *kid_weight_mem[1:11],
-    *kid_weight[1:11],
-    *kid_height_mem[1:11],
-    *kid_height[1:11],
-    *kid_head_mem[1:11],
-    *kid_head[1:11],
+    *kid_info[1:171],
+
 
     migrate = True,
 )
@@ -769,6 +737,8 @@ db.define_table("genetic_test_records",
     *paraffin_texture[1:11],
     *blood_others[1:11],
 
+
+  
     Field("use_medicine_1_1", "string",label="مصرف دارو",required = True), 
     Field("duration_medicine_1_1", "string",label="مدت مصرف",required = True), 
     Field("use_medicine_1_2", "string",label="مصرف دارو",required = True), 
