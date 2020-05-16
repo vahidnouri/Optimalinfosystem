@@ -197,8 +197,8 @@ upload_fields = []
 for i in range(1,101):
     upload_fields.append(Field("upload_{}".format(i),"upload",label="آپلود مدرک پزشکی {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
 
-counselor_name = []
-counselor_gen_reason = []
+# counselor_name = []
+# counselor_gen_reason = []
 upload_fields_counselling = []
 
 specialist_price = []
@@ -206,6 +206,7 @@ specialist_field = []
 
 kid_info = []
 female_rec = []
+g_counseling_records = []
 
 
 molecular_diagnosis = []
@@ -358,13 +359,13 @@ for i in range(1,6):
     female_rec.append(Field("f_ab_pregnancy_numebr_{}".format(i), "string",label="بارداری چندم",required=True,default=' '),)
     female_rec.append(Field("f_ab_mother_age_{}".format(i), "string",label="سن مادر",required=True,default=' '),)
     female_rec.append(Field("f_ab_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
-    female_rec.append(Field("f_abortion_reason_{}".format(i), "string",label="علت",required=True,default=' '),)
+    female_rec.append(Field("f_abortion_reason_{}".format(i).format(i), "string",label="علت",required=True,default=' '),)
 
-    female_rec.append(Field("f_iufd_rec_{}", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه",required=True,),)
-    female_rec.append(Field("f_iufd_pregnancy_numebr_{}", "string",label="بارداری چندم",required=True,default=' '),)
-    female_rec.append(Field("f_iufd_mother_age_{}", "string",label="سن مادر",required=True,default=' '),)
-    female_rec.append(Field("f_iufd_pregnancy_age_{}", "string",label="سن حاملگی",required=True,default=' '),)
-    female_rec.append(Field("f_iufd_reason_{}", "string",label="علت",required=True,default=' '),)
+    female_rec.append(Field("f_iufd_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه",required=True,),)
+    female_rec.append(Field("f_iufd_pregnancy_numebr_{}".format(i), "string",label="بارداری چندم",required=True,default=' '),)
+    female_rec.append(Field("f_iufd_mother_age_{}".format(i), "string",label="سن مادر",required=True,default=' '),)
+    female_rec.append(Field("f_iufd_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
+    female_rec.append(Field("f_iufd_reason_{}".format(i), "string",label="علت",required=True,default=' '),)
 
 signature = db.Table(db, 'signature',
     Field('created_on', 'datetime', default=request.now),
