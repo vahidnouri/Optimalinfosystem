@@ -242,7 +242,24 @@ pnd_1_2 = []
 cyto_blood = []
 cyto_amniotic = []
 
-
+infertility_disease = []
+infectious_disease = []
+malignancies_cancer = []
+blood_diseases = []
+immune_disorders = []
+endocrine_disorders = []
+nutritional_disorders = []
+autism = []
+mental_disorders = []
+nervous_diseases = []
+visual_disease = []
+hearing_diseases = []
+cardiovascular_diseases = []
+respiratory_system_diseases = []
+gastrointestinal_diseases = []
+skin_diseases = []
+musculoskeletal_diseases = []
+genitourinary_diseases = []
 
 for i in range(1,21):
     counselor_name.append(Field("counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '))    
@@ -288,6 +305,24 @@ for i in range(1,11):
     cyto_amniotic.append(Field("cyto_amniotic_{}", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک آمنیون",required = True), )
     
 
+    infertility_disease.append(Field("infertility_disease_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های زنان و نازایی : ناباروری، سقط مکرر، اختلالات قائدگی ",required = True), )
+    infectious_disease.append(Field("infectious_disease_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های عفونی و انگلی ",required = True), )
+    malignancies_cancer.append(Field("malignancies_cancer_{}", requires=IS_IN_SET(yes_no, zero=None),label="انواع بدخیمی ها و سرطان",required = True), )
+    blood_diseases.append(Field("blood_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های خون و سیستم خونساز مانند کم خونی ها: کم خونی داسی شکل، تالاسمی ها، هموفیلی",required = True), )
+    immune_disorders.append(Field("immune_disorders_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات ایمنی",required = True), )
+    endocrine_disorders.append(Field("endocrine_disorders_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات غدد درون ریز :دیابت، بیماری های تیروئید، غده فوق کلیوی، هایپرپلازی مادرزادی آدرنال",required = True), )
+    nutritional_disorders.append(Field("nutritional_disorders_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات تغذیه",required = True), )
+    autism.append(Field("autism_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات شناختی رفتاری :اوتیسم، روان پریشی",required = True), )
+    mental_disorders.append(Field("mental_disorders_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات عقب ماندگی ذهنی :سندرم های داوون، ایکس شکننده، پرادرویلی – آنجلمن، سندرم رت",required = True), )
+    nervous_diseases.append(Field("nervous_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم اعصاب :سکته، سردرد، تشنج، اختلالات حرکتی – حسی، دیستونی، پارکینسون، ام اس ",required = True), )
+    visual_disease.append(Field("visual_disease_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم بینایی",required = True), )
+    hearing_diseases.append(Field("hearing_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم شنوایی",required = True), )
+    cardiovascular_diseases.append(Field("cardiovascular_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم قلب و گردش خون :کاردیومیوپاتی ها",required = True), )
+    respiratory_system_diseases.append(Field("respiratory_system_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم تنفسی",required = True), )
+    gastrointestinal_diseases.append(Field("gastrointestinal_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم گوارش",required = True), )
+    skin_diseases.append(Field("skin_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های بافت پوست و بافت همبند:سندرم مارفان",required = True), )
+    musculoskeletal_diseases.append(Field("musculoskeletal_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم عضلانی :دیستروفی های بکر، دوشن",required = True), )
+    genitourinary_diseases.append(Field("genitourinary_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم ادراری تناسلی :ابهام جنسی، اختلالات کلیوی ",required = True), )
     
 for i in range(1,6):
     
@@ -648,24 +683,25 @@ db.define_table("genetic_test_records",
     *cyto_amniotic[1:11],    
 #  اندیکاسیون درخواست آزمایش
 
-    Field("infertility_disease_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های زنان و نازایی : ناباروری، سقط مکرر، اختلالات قائدگی ",required = True), 
-    Field("infectious_disease_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های عفونی و انگلی ",required = True), 
-    Field("malignancies_cancer_1", requires=IS_IN_SET(yes_no, zero=None),label="انواع بدخیمی ها و سرطان",required = True), 
-    Field("blood_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های خون و سیستم خونساز مانند کم خونی ها: کم خونی داسی شکل، تالاسمی ها، هموفیلی",required = True), 
-    Field("immune_disorders_1", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات ایمنی",required = True), 
-    Field("endocrine_disorders_1", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات غدد درون ریز :دیابت، بیماری های تیروئید، غده فوق کلیوی، هایپرپلازی مادرزادی آدرنال",required = True), 
-    Field("nutritional_disorders_1", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات تغذیه",required = True), 
-    Field("autism_1", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات شناختی رفتاری :اوتیسم، روان پریشی",required = True), 
-    Field("mental_disorders_1", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات عقب ماندگی ذهنی :سندرم های داوون، ایکس شکننده، پرادرویلی – آنجلمن، سندرم رت",required = True), 
-    Field("nervous_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم اعصاب :سکته، سردرد، تشنج، اختلالات حرکتی – حسی، دیستونی، پارکینسون، ام اس ",required = True), 
-    Field("visual_disease_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم بینایی",required = True), 
-    Field("hearing_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم شنوایی",required = True), 
-    Field("cardiovascular_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم قلب و گردش خون :کاردیومیوپاتی ها",required = True), 
-    Field("respiratory_system_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم تنفسی",required = True), 
-    Field("gastrointestinal_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم گوارش",required = True), 
-    Field("skin_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های بافت پوست و بافت همبند:سندرم مارفان",required = True), 
-    Field("musculoskeletal_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم عضلانی :دیستروفی های بکر، دوشن",required = True), 
-    Field("genitourinary_diseases_1", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم ادراری تناسلی :ابهام جنسی، اختلالات کلیوی ",required = True), 
+    *infertility_disease [1:11],
+    *infectious_disease [1:11],
+    *malignancies_cancer [1:11],
+    *blood_diseases [1:11],
+    *immune_disorders [1:11],
+    *endocrine_disorders [1:11],
+    *nutritional_disorders [1:11],
+    *autism [1:11],
+    *mental_disorders [1:11],
+    *nervous_diseases [1:11],
+    *visual_disease [1:11],
+    *hearing_diseases [1:11],
+    *cardiovascular_diseases [1:11],
+    *respiratory_system_diseases [1:11],
+    *gastrointestinal_diseases [1:11],
+    *skin_diseases [1:11],
+    *musculoskeletal_diseases [1:11],
+    *genitourinary_diseases [1:11],
+
 
 #  نمونه خون
 
