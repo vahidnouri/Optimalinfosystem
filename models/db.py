@@ -200,24 +200,12 @@ for i in range(1,101):
 counselor_name = []
 counselor_gen_reason = []
 upload_fields_counselling = []
+
 specialist_price = []
 specialist_field = []
 
 kid_info = []
 female_rec = []
-
-# f_abortion_rec = []
-# f_ab_pregnancy_numebr = []
-# f_ab_mother_age = []
-# f_ab_pregnancy_age = []
-# f_abortion_reason = []
-
-
-# f_iufd_rec = []
-# f_iufd_pregnancy_numebr = []
-# f_iufd_mother_age = []
-# f_iufd_pregnancy_age = []
-# f_iufd_reason = []
 
 
 molecular_diagnosis = []
@@ -315,54 +303,54 @@ for i in range(1,11):
 
 
 
-    molecular_diagnosis.append(Field("molecular_diagnosis_{}", requires=IS_IN_SET(yes_no, zero=None),label="تشخیص مولکولی", required = True), )
-    pnd_1.append(Field("pnd_1_{}", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 PND",required = True ), )
-    pnd_2.append(Field("pnd_2_{}", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 2 PND", required = True), )
-    pnd_1_2.append(Field("pnd_1_2_{}", requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 و 2 PND", required = True), )
-    cyto_blood.append(Field("cyto_blood_{}", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک خون", required = True), )
-    cyto_amniotic.append(Field("cyto_amniotic_{}", requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک آمنیون",required = True), )
+    molecular_diagnosis.append(Field("molecular_diagnosis_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="تشخیص مولکولی", required = True), )
+    pnd_1.append(Field("pnd_1_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 PND",required = True ), )
+    pnd_2.append(Field("pnd_2_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="مرحله 2 PND", required = True), )
+    pnd_1_2.append(Field("pnd_1_2_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="مرحله 1 و 2 PND", required = True), )
+    cyto_blood.append(Field("cyto_blood_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک خون", required = True), )
+    cyto_amniotic.append(Field("cyto_amniotic_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="سیتوژنتیک آمنیون",required = True), )
     
 
-    infertility_disease.append(Field("infertility_disease_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های زنان و نازایی : ناباروری، سقط مکرر، اختلالات قائدگی ",required = True), )
-    infectious_disease.append(Field("infectious_disease_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های عفونی و انگلی ",required = True), )
-    malignancies_cancer.append(Field("malignancies_cancer_{}", requires=IS_IN_SET(yes_no, zero=None),label="انواع بدخیمی ها و سرطان",required = True), )
-    blood_diseases.append(Field("blood_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های خون و سیستم خونساز مانند کم خونی ها: کم خونی داسی شکل، تالاسمی ها، هموفیلی",required = True), )
-    immune_disorders.append(Field("immune_disorders_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات ایمنی",required = True), )
-    endocrine_disorders.append(Field("endocrine_disorders_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات غدد درون ریز :دیابت، بیماری های تیروئید، غده فوق کلیوی، هایپرپلازی مادرزادی آدرنال",required = True), )
-    nutritional_disorders.append(Field("nutritional_disorders_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات تغذیه",required = True), )
-    autism.append(Field("autism_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات شناختی رفتاری :اوتیسم، روان پریشی",required = True), )
-    mental_disorders.append(Field("mental_disorders_{}", requires=IS_IN_SET(yes_no, zero=None),label="اختلالات عقب ماندگی ذهنی :سندرم های داوون، ایکس شکننده، پرادرویلی – آنجلمن، سندرم رت",required = True), )
-    nervous_diseases.append(Field("nervous_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم اعصاب :سکته، سردرد، تشنج، اختلالات حرکتی – حسی، دیستونی، پارکینسون، ام اس ",required = True), )
-    visual_disease.append(Field("visual_disease_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم بینایی",required = True), )
-    hearing_diseases.append(Field("hearing_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم شنوایی",required = True), )
-    cardiovascular_diseases.append(Field("cardiovascular_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم قلب و گردش خون :کاردیومیوپاتی ها",required = True), )
-    respiratory_system_diseases.append(Field("respiratory_system_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم تنفسی",required = True), )
-    gastrointestinal_diseases.append(Field("gastrointestinal_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم گوارش",required = True), )
-    skin_diseases.append(Field("skin_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های بافت پوست و بافت همبند:سندرم مارفان",required = True), )
-    musculoskeletal_diseases.append(Field("musculoskeletal_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم عضلانی :دیستروفی های بکر، دوشن",required = True), )
-    genitourinary_diseases.append(Field("genitourinary_diseases_{}", requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم ادراری تناسلی :ابهام جنسی، اختلالات کلیوی ",required = True), )
+    infertility_disease.append(Field("infertility_disease_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های زنان و نازایی : ناباروری، سقط مکرر، اختلالات قائدگی ",required = True), )
+    infectious_disease.append(Field("infectious_disease_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های عفونی و انگلی ",required = True), )
+    malignancies_cancer.append(Field("malignancies_cancer_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="انواع بدخیمی ها و سرطان",required = True), )
+    blood_diseases.append(Field("blood_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های خون و سیستم خونساز مانند کم خونی ها: کم خونی داسی شکل، تالاسمی ها، هموفیلی",required = True), )
+    immune_disorders.append(Field("immune_disorders_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="اختلالات ایمنی",required = True), )
+    endocrine_disorders.append(Field("endocrine_disorders_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="اختلالات غدد درون ریز :دیابت، بیماری های تیروئید، غده فوق کلیوی، هایپرپلازی مادرزادی آدرنال",required = True), )
+    nutritional_disorders.append(Field("nutritional_disorders_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="اختلالات تغذیه",required = True), )
+    autism.append(Field("autism_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="اختلالات شناختی رفتاری :اوتیسم، روان پریشی",required = True), )
+    mental_disorders.append(Field("mental_disorders_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="اختلالات عقب ماندگی ذهنی :سندرم های داوون، ایکس شکننده، پرادرویلی – آنجلمن، سندرم رت",required = True), )
+    nervous_diseases.append(Field("nervous_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم اعصاب :سکته، سردرد، تشنج، اختلالات حرکتی – حسی، دیستونی، پارکینسون، ام اس ",required = True), )
+    visual_disease.append(Field("visual_disease_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم بینایی",required = True), )
+    hearing_diseases.append(Field("hearing_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم شنوایی",required = True), )
+    cardiovascular_diseases.append(Field("cardiovascular_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم قلب و گردش خون :کاردیومیوپاتی ها",required = True), )
+    respiratory_system_diseases.append(Field("respiratory_system_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم تنفسی",required = True), )
+    gastrointestinal_diseases.append(Field("gastrointestinal_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم گوارش",required = True), )
+    skin_diseases.append(Field("skin_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های بافت پوست و بافت همبند:سندرم مارفان",required = True), )
+    musculoskeletal_diseases.append(Field("musculoskeletal_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم عضلانی :دیستروفی های بکر، دوشن",required = True), )
+    genitourinary_diseases.append(Field("genitourinary_diseases_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بیماری های سیستم ادراری تناسلی :ابهام جنسی، اختلالات کلیوی ",required = True), )
 
 
 
-    edta.append(Field("edta_{}", requires=IS_IN_SET(yes_no, zero=None),label="EDTA خون ",required = True), )
-    heparin.append(Field("heparin_{}", requires=IS_IN_SET(yes_no, zero=None),label="خون هپارینه ",required = True), )
-    cvs.append(Field("cvs_{}", requires=IS_IN_SET(yes_no, zero=None),label="CVS",required = True), )
-    af.append(Field("af_{}", requires=IS_IN_SET(yes_no, zero=None),label="AF",required = True), )
-    abortion_product.append(Field("abortion_product_{}", requires=IS_IN_SET(yes_no, zero=None),label="محصول سقط",required = True), )
-    cortage_product.append(Field("cortage_product_{}", requires=IS_IN_SET(yes_no, zero=None),label="محصول کورتاژ",required = True), )
-    paraffin_texture.append(Field("paraffin_texture_{}", requires=IS_IN_SET(yes_no, zero=None),label="بافت پارافینه",required = True), )
-    blood_others.append(Field("blood_others_{}", "string",label="سایر",required = True), )
+    edta.append(Field("edta_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="EDTA خون ",required = True), )
+    heparin.append(Field("heparin_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="خون هپارینه ",required = True), )
+    cvs.append(Field("cvs_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="CVS",required = True), )
+    af.append(Field("af_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="AF",required = True), )
+    abortion_product.append(Field("abortion_product_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="محصول سقط",required = True), )
+    cortage_product.append(Field("cortage_product_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="محصول کورتاژ",required = True), )
+    paraffin_texture.append(Field("paraffin_texture_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="بافت پارافینه",required = True), )
+    blood_others.append(Field("blood_others_{}".format(i), "string",label="سایر",required = True), )
     
-    pregnancy_weeks.append(Field("pregnancy_weeks_{}", "string",label="هفته چندم بارداری",required = True), )
-    pregnancy_days.append(Field("pregnancy_days_{}", "string",label="روز چندم بارداری",required = True), )
-    sampler.append(Field("sampler_{}", "string",label="پزشک نمونه گیر",required = True), )
+    pregnancy_weeks.append(Field("pregnancy_weeks_{}".format(i), "string",label="هفته چندم بارداری",required = True), )
+    pregnancy_days.append(Field("pregnancy_days_{}".format(i), "string",label="روز چندم بارداری",required = True), )
+    sampler.append(Field("sampler_{}".format(i), "string",label="پزشک نمونه گیر",required = True), )
 
-    has_infection_history.append(Field("has_infection_history_{}", requires=IS_IN_SET(yes_no, zero=None),label="سابقه عفونت ندارد",required = True), )
-    hbv.append(Field("hbv_{}", requires=IS_IN_SET(yes_no, zero=None),label="HBV",required = True), )
-    hcv.append(Field("hcv_{}", requires=IS_IN_SET(yes_no, zero=None),label="HCV",required = True), )
-    hiv.append(Field("hiv_{}", requires=IS_IN_SET(yes_no, zero=None),label="HIV",required = True), )
-    htlv1.append(Field("htlv1_{}", requires=IS_IN_SET(yes_no, zero=None),label="HTLV1",required = True), )
-    other_infections.append(Field("other_infections_{}", "string",label="سایر",required = True), )
+    has_infection_history.append(Field("has_infection_history_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="سابقه عفونت ندارد",required = True), )
+    hbv.append(Field("hbv_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="HBV",required = True), )
+    hcv.append(Field("hcv_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="HCV",required = True), )
+    hiv.append(Field("hiv_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="HIV",required = True), )
+    htlv1.append(Field("htlv1_{}".format(i), requires=IS_IN_SET(yes_no, zero=None),label="HTLV1",required = True), )
+    other_infections.append(Field("other_infections_{}".format(i), "string",label="سایر",required = True), )
     
 for i in range(1,6):
     
