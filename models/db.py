@@ -204,19 +204,20 @@ specialist_price = []
 specialist_field = []
 
 kid_info = []
+female_rec = []
 
-f_abortion_rec = []
-f_ab_pregnancy_numebr = []
-f_ab_mother_age = []
-f_ab_pregnancy_age = []
-f_abortion_reason = []
+# f_abortion_rec = []
+# f_ab_pregnancy_numebr = []
+# f_ab_mother_age = []
+# f_ab_pregnancy_age = []
+# f_abortion_reason = []
 
 
-f_iufd_rec = []
-f_iufd_pregnancy_numebr = []
-f_iufd_mother_age = []
-f_iufd_pregnancy_age = []
-f_iufd_reason = []
+# f_iufd_rec = []
+# f_iufd_pregnancy_numebr = []
+# f_iufd_mother_age = []
+# f_iufd_pregnancy_age = []
+# f_iufd_reason = []
 
 
 molecular_diagnosis = []
@@ -365,17 +366,17 @@ for i in range(1,11):
     
 for i in range(1,6):
     
-    f_abortion_rec.append(Field("f_abortion_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط",required=True),)
-    f_ab_pregnancy_numebr.append(Field("f_ab_pregnancy_numebr_{}".format(i), "string",label="بارداری چندم",required=True,default=' '),)
-    f_ab_mother_age.append(Field("f_ab_mother_age_{}".format(i), "string",label="سن مادر",required=True,default=' '),)
-    f_ab_pregnancy_age.append(Field("f_ab_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
-    f_abortion_reason.append(Field("f_abortion_reason_{}".format(i), "string",label="علت",required=True,default=' '),)
+    female_rec.append(Field("f_abortion_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه سقط",required=True),)
+    female_rec.append(Field("f_ab_pregnancy_numebr_{}".format(i), "string",label="بارداری چندم",required=True,default=' '),)
+    female_rec.append(Field("f_ab_mother_age_{}".format(i), "string",label="سن مادر",required=True,default=' '),)
+    female_rec.append(Field("f_ab_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
+    female_rec.append(Field("f_abortion_reason_{}".format(i), "string",label="علت",required=True,default=' '),)
 
-    f_iufd_rec.append(Field("f_iufd_rec_{}", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه",required=True,),)
-    f_iufd_pregnancy_numebr.append(Field("f_iufd_pregnancy_numebr_{}", "string",label="بارداری چندم",required=True,default=' '),)
-    f_iufd_mother_age.append(Field("f_iufd_mother_age_{}", "string",label="سن مادر",required=True,default=' '),)
-    f_iufd_pregnancy_age.append(Field("f_iufd_pregnancy_age_{}", "string",label="سن حاملگی",required=True,default=' '),)
-    f_iufd_reason.append(Field("f_iufd_reason_{}", "string",label="علت",required=True,default=' '),)
+    female_rec.append(Field("f_iufd_rec_{}", requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه",required=True,),)
+    female_rec.append(Field("f_iufd_pregnancy_numebr_{}", "string",label="بارداری چندم",required=True,default=' '),)
+    female_rec.append(Field("f_iufd_mother_age_{}", "string",label="سن مادر",required=True,default=' '),)
+    female_rec.append(Field("f_iufd_pregnancy_age_{}", "string",label="سن حاملگی",required=True,default=' '),)
+    female_rec.append(Field("f_iufd_reason_{}", "string",label="علت",required=True,default=' '),)
 
 signature = db.Table(db, 'signature',
     Field('created_on', 'datetime', default=request.now),
@@ -563,17 +564,8 @@ db.define_table("further_info_section",
     Field("f_infertility_rec", requires=IS_IN_SET(yes_no_unknown, zero=None),label="سابقه عدم باروری"),
     Field("f_infertility_year", "string",label="مدت: سال"),
     Field("f_infertility_reason", "string",label="علت"),
-    *f_abortion_rec[1:6],
-    *f_ab_pregnancy_numebr[1:6],
-    *f_ab_mother_age[1:6],
-    *f_ab_pregnancy_age[1:6],
-    *f_abortion_reason[1:6],
 
-    *f_iufd_rec[1:6],
-    *f_iufd_pregnancy_numebr[1:6],
-    *f_iufd_mother_age[1:6],
-    *f_iufd_pregnancy_age[1:6],
-    *f_iufd_reason[1:6],
+    *female_rec[1:61]
 
     Field("infertility_treatments", requires=IS_IN_SET(yes_no_unknown, zero=None),label="اقدامات درمانی ناباروری"),
     Field("medicine_treatments", "string",label="درمان دارویی"),
