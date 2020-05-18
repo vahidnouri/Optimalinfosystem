@@ -197,8 +197,9 @@ test_users = ["آقا","خانم","فرزند","جنین",""]
 
 
 upload_fields = []
+
 for i in range(1,101):
-    upload_fields.append(Field("upload_{}".format(i),"upload",label="آپلود مدرک پزشکی {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
+    upload_fields.append(Field("upload_{}".format(i),"upload",label="آپلود مدرک پزشکی {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True),)
 
 genetic_counselling_fields = []
 specialist_counselling_fields = []
@@ -214,15 +215,15 @@ genetic_test_rec = []
 
    
 for i in range(1,11):
-    genetic_counselling_fields.append(Field("g_counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '))    
-    genetic_counselling_fields.append(Field("reason_{}".format(i),requires=IS_IN_SET(counselor_genetic_reasons, zero=None),label="علت".format(i),))    
-    genetic_counselling_fields.append(Field("g_upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
+    genetic_counselling_fields.append(Field("g_counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '),)    
+    genetic_counselling_fields.append(Field("reason_{}".format(i),requires=IS_IN_SET(counselor_genetic_reasons, zero=None),label="علت".format(i)),)    
+    genetic_counselling_fields.append(Field("g_upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True),)
 
 for i in range(1,11):
-    specialist_counselling_fields.append(Field("sp_counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '))    
-    specialist_counselling_fields.append(Field("field_{}".format(i),requires=IS_IN_SET(special_list, zero=None),label="تخصص".format(i),))    
-    specialist_counselling_fields.append(Field("sp_upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True)))
-    specialist_counselling_fields.append(Field("price_{}".format(i),"string",label="هزینه".format(i),))
+    specialist_counselling_fields.append(Field("sp_counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '),)    
+    specialist_counselling_fields.append(Field("field_{}".format(i),requires=IS_IN_SET(special_list, zero=None),label="تخصص".format(i)),)    
+    specialist_counselling_fields.append(Field("sp_upload_{}".format(i),"upload",label="آپلود فایل {}".format(i),uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True),)
+    specialist_counselling_fields.append(Field("price_{}".format(i),"string",label="هزینه".format(i)),)
 
     # specialist_price.append(Field("price_{}".format(i),"string",label="هزینه".format(i),))    
 
@@ -313,7 +314,7 @@ for i in range(1,6):
     female_rec.append(Field("f_ab_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
     female_rec.append(Field("f_abortion_reason_{}".format(i).format(i), "string",label="علت",required=True,default=' '),)
 
-    female_rec.append(Field("f_iufd_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه",required=True,),)
+    female_rec.append(Field("f_iufd_rec_{}".format(i), requires=IS_IN_SET(yes_no_unknown, zero=None),label="IUFD سابقه",required=True),)
     female_rec.append(Field("f_iufd_pregnancy_numebr_{}".format(i), "string",label="بارداری چندم",required=True,default=' '),)
     female_rec.append(Field("f_iufd_mother_age_{}".format(i), "string",label="سن مادر",required=True,default=' '),)
     female_rec.append(Field("f_iufd_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
@@ -359,7 +360,7 @@ db.define_table("people_info",
     Field("other_sects", "string",label="سایر"),
     Field("education", requires=IS_IN_SET(edu_list, zero=None),label="تحصیلات",required=True),
     Field("career", requires=IS_IN_SET(job, zero=None),label="شغل",required=True),
-    Field("marital_con", requires=IS_IN_SET(marital_condition, zero=None),label="وضعیت تاهل",required=True)
+    Field("marital_con", requires=IS_IN_SET(marital_condition, zero=None),label="وضعیت تاهل",required=True),
 
 
 # مشخصات همسر عنوان
@@ -407,7 +408,7 @@ db.define_table("kids_info",
     *kid_info[1:171],
 
 
-    migrate = True,
+    migrate = True
 )
 
 # ----------------------- Contact Section ------------------------------
@@ -506,7 +507,7 @@ db.define_table("further_info_section",
     Field("f_infertility_year", "string",label="مدت: سال"),
     Field("f_infertility_reason", "string",label="علت"),
 
-    *female_rec[1:61]
+    *female_rec[1:61],
 
     Field("infertility_treatments", requires=IS_IN_SET(yes_no_unknown, zero=None),label="اقدامات درمانی ناباروری"),
     Field("medicine_treatments", "string",label="درمان دارویی"),
@@ -565,7 +566,7 @@ db.define_table("further_info_section",
     Field("m_infertility_reason", "string",label="علت"),
     Field("m_explanation", "text",label="توضیحات"),
 
-    migrate = True,    
+    migrate = True    
 )
 
 
@@ -578,9 +579,9 @@ db.define_table("medical_docs",
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
 
     Field("pedigree", "upload",label="آپلود شجره نامه", uploadfolder='C:/Web2Py/applications/optimalinfosystem/static/images',uploadseparate=True),
-    *upload_fields[1:101]
+    *upload_fields[1:101],
 
-    migrate = True,   
+    migrate = True   
 
 )
 
@@ -594,7 +595,7 @@ db.define_table("genetics_counseling_records",
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
     *genetic_counselling_fields[1:11],
 
-    migrate = True,   
+    migrate = True   
 
 )
 
@@ -606,7 +607,7 @@ db.define_table("special_counseling_records",
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
     *specialist_counselling_fields[1:11],
 
-    migrate = True,   
+    migrate = True   
 
 )
 
@@ -622,7 +623,7 @@ db.define_table("genetic_test_records",
     Field("referred_physician", "string",label="پزشک ارجاع دهنده", required = True, default = ' '), 
     Field("referred_physician_sp", "string",label="تخصص", required = True, default = ' '), 
 
-    *genetic_test_rec[1:6]
+    *genetic_test_rec[1:6],
  
-    migrate = True,
+    migrate = True
 )    
