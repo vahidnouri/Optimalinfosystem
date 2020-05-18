@@ -97,6 +97,7 @@ auth.settings.expiration = 3600 * 8  # seconds
 auth.settings.extra_fields['auth_user'] = [
     Field("people_info", type="boolean"),
     Field("further_info", type="boolean"),
+    Field("contact_info", type="boolean"),    
     Field("medical_docs", type="boolean"),
     Field("genetics_counseling_records", type="boolean"),
     Field("special_counseling_records", type="boolean"),
@@ -209,59 +210,7 @@ g_counseling_records = []
 
 genetic_test_rec = []
 
-molecular_diagnosis = []
-pnd_1 = []
-pnd_2 = []
-pnd_1_2 = []
-cyto_blood = []
-cyto_amniotic = []
-
-infertility_disease = []
-infectious_disease = []
-malignancies_cancer = []
-blood_diseases = []
-immune_disorders = []
-endocrine_disorders = []
-nutritional_disorders = []
-autism = []
-mental_disorders = []
-nervous_diseases = []
-visual_disease = []
-hearing_diseases = []
-cardiovascular_diseases = []
-respiratory_system_diseases = []
-gastrointestinal_diseases = []
-skin_diseases = []
-musculoskeletal_diseases = []
-genitourinary_diseases = []
-
-
-edta = []
-heparin = []
-cvs = []
-af = []
-abortion_product = []
-cortage_product = []
-paraffin_texture = []
-blood_others = []
-
-
-pregnancy_weeks = []
-pregnancy_days = []
-sampler = []
-has_infection_history = []
-hbv = []
-hcv = []
-hiv = []
-htlv1 = []
-other_infections = []
-
-
-use_medicine = []
-duration_medicine = []
-
-
-    
+   
 for i in range(1,11):
     genetic_counselling_fields.append(Field("g_counselor_{}".format(i),requires=IS_IN_SET(genetic_counselor, zero=None),label="نام مشاور {}".format(i),default=' '))    
     genetic_counselling_fields.append(Field("reason_{}".format(i),requires=IS_IN_SET(counselor_genetic_reasons, zero=None),label="علت".format(i),))    
