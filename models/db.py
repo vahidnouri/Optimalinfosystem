@@ -98,9 +98,9 @@ auth.settings.extra_fields['auth_user'] = [
     Field("people_info", type="boolean"),
     Field("further_info", type="boolean"),
     Field("medical_docs", type="boolean"),
-    Field("genetics_records", type="boolean"),
-    Field("professional_cons_records", type="boolean"),
-    Field("labs_records", type="boolean"),
+    Field("genetics_counseling_records", type="boolean"),
+    Field("special_counseling_records", type="boolean"),
+    Field("genetic_test_records", type="boolean"),
     Field("admin_", type="boolean"),
 ]
 auth.define_tables( migrate=False )
@@ -619,7 +619,7 @@ db.define_table("further_info_section",
 
 
 
-db.define_table("physician_docs",   
+db.define_table("medical_docs",   
     Field("date", "date",label="تاریخ", writable = False),    
     Field("time", "time",label="زمان", writable = False),  
     signature,  
