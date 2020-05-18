@@ -94,9 +94,11 @@ auth = Auth(db, host_names=configuration.get('host.names'))
 # -------------------------------------------------------------------------
 auth.settings.expiration = 3600 * 8  # seconds
 
-auth.settings.extra_fields['auth_user'] = [
+auth.settings.extra_fields['auth_user'] = [    
+    Field("principal_info", type="boolean"),
     Field("people_info", type="boolean"),
     Field("further_info", type="boolean"),
+    Field("kids_info", type="boolean"),    
     Field("contact_info", type="boolean"),    
     Field("medical_docs", type="boolean"),
     Field("genetics_counseling_records", type="boolean"),
