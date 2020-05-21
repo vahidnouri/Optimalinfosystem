@@ -320,13 +320,18 @@ for i in range(1,6):
     female_rec.append(Field("f_iufd_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
     female_rec.append(Field("f_iufd_reason_{}".format(i), "string",label="علت",required=True,default=' '),)
 
-signature = db.Table(db, 'signature',
+signature = db.table(db, 'signature',
     Field('created_on', 'datetime', default=request.now),
     Field('created_by', db.auth_user, default=auth.user_id),
     Field('updated_on', 'datetime', update=request.now),
     Field('updated_by', db.auth_user, update=auth.user_id))
 
-
+female_records = define_table("f_recs",
+    Field('test', 'string', readable = False),
+    *female_rec[1:61],
+    migrate = True,
+    fake_migrate=False
+    )
 
 db.define_table("principal_info",
     # Field("case_number", "string",label="شماره پرونده"),
@@ -507,7 +512,7 @@ db.define_table("further_info_section",
     Field("f_infertility_year", "string",label="مدت: سال"),
     Field("f_infertility_reason", "string",label="علت"),
 
-    *female_rec[1:61],
+    female_records,
 
     Field("infertility_treatments", requires=IS_IN_SET(yes_no_unknown, zero=None),label="اقدامات درمانی ناباروری"),
     Field("medicine_treatments", "string",label="درمان دارویی"),
