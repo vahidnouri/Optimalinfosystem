@@ -231,7 +231,7 @@ for i in range(1,11):
 
 for i in range(1,11):
     
-    kid_name.append(Field("kid_{}_name".format(i), "string",label="نام فرزند درگیر عارضه",required=True,default=' '),)        
+    kid_info.append(Field("kid_{}_name".format(i), "string",label="نام فرزند درگیر عارضه",required=True,default=' '),)        
     kid_info.append(Field("kid_{}_id_code".format(i), "string",label="کدملی",required=True,default=' '),)        
     kid_info.append(Field("kid_{}_birth".format(i), "string",label="تاریخ تولد",required=True,default=' '),)  
     kid_info.append(Field("kid_{}_gender".format(i), requires=IS_IN_SET(kid_genders, zero=None),label="جنسیت",required=True,default=' '),) 
