@@ -320,34 +320,41 @@ for i in range(1,6):
     female_rec.append(Field("f_iufd_pregnancy_age_{}".format(i), "string",label="سن حاملگی",required=True,default=' '),)
     female_rec.append(Field("f_iufd_reason_{}".format(i), "string",label="علت",required=True,default=' '),)
 
-signature = db.table(db, 'signature',
-    Field('created_on', 'datetime', default=request.now),
-    Field('created_by', db.auth_user, default=auth.user_id),
-    Field('updated_on', 'datetime', update=request.now),
-    Field('updated_by', db.auth_user, update=auth.user_id))
 
-female_records = define_table("f_recs",
+female_records = db.Table(db,"f_recs",
     Field('test', 'string', readable = False),
     *female_rec[1:61],
     migrate = True,
     fake_migrate=False
     )
 
+signature = db.Table(db, 'signatures',
+    Field('created_on', 'datetime', default=request.now),
+    Field('created_by', db.auth_user, default=auth.user_id),
+    Field('updated_on', 'datetime', update=request.now),
+    Field('updated_by', db.auth_user, update=auth.user_id),
+    migrate = True,
+    fake_migrate=False
+    )
+
+
+
+
 db.define_table("principal_info",
     # Field("case_number", "string",label="شماره پرونده"),
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False),    
+    Field("D", "datetime",label="تاریخ", writable = False, rname = "current_date"),    
+    Field("zaman", "time",label="زمان", writable = False),    
     signature,
     Field("case_number", "string",label="شماره پرونده", required=True), 
        
     migrate = True,
-    # fake_migrate=False,
+    # fake_migrate=True,
     )
 # -----------------------Parents Section ------------------------------
 
 db.define_table("people_info", 
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False),    
+    Field("D", "date",label="تاریخ", writable = False),    
+    Field("zaman", "time",label="زمان", writable = False),    
     signature,
 
     Field("full_name", "string",label="نام و نام خانوادگی", required=True),
@@ -393,8 +400,8 @@ db.define_table("people_info",
 # -----------------------Kids Section ------------------------------
 
 db.define_table("kids_info",    
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False), 
+    Field("D", "date",label="تاریخ", writable = False),    
+    Field("zaman", "time",label="زمان", writable = False), 
     signature,   
 
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
@@ -418,8 +425,8 @@ db.define_table("kids_info",
 
 # ----------------------- Contact Section ------------------------------
 db.define_table("contact_info",    
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False),    
+    Field("D", "date",label="تاریخ", writable = False),    
+    Field("zaman", "time",label="زمان", writable = False),    
     signature,
 
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
@@ -442,8 +449,8 @@ db.define_table("contact_info",
 #-------------------- Further info Section -------------------------------
 
 db.define_table("further_info_section",
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False),    
+    Field("D", "date",label="تاریخ", writable = False),    
+    Field("zaman", "time",label="زمان", writable = False),    
     signature,
 
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False),
@@ -577,8 +584,8 @@ db.define_table("further_info_section",
 
 
 db.define_table("medical_docs",   
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False),  
+    Field("D", "date",label="تاریخ", writable = False),    
+    Field("zaman", "time",label="زمان", writable = False),  
     signature,  
 
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
@@ -593,8 +600,8 @@ db.define_table("medical_docs",
 
 
 db.define_table("genetics_counseling_records",   
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False), 
+    Field("D", "date",label="تاریخ", writable = False),    
+    Field("zaman", "time",label="زمان", writable = False), 
     signature,   
 
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
@@ -605,8 +612,8 @@ db.define_table("genetics_counseling_records",
 )
 
 db.define_table("special_counseling_records",   
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False),    
+    Field("D", "date",label="تاریخ", writable = False),    
+    Field("zaman", "time",label="زمان", writable = False),    
     signature,
 
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
@@ -618,8 +625,8 @@ db.define_table("special_counseling_records",
 
 
 db.define_table("genetic_test_records",
-    Field("date", "date",label="تاریخ", writable = False),    
-    Field("time", "time",label="زمان", writable = False),    
+    Field("D", "date",label="تاریخ", writable = False),    
+    Field("zaman", "time",label="زمان", writable = False),    
     signature,
     Field("case_number", "string",label="شماره پرونده", writable=False, readable = False), 
 
